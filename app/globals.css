@@ -1,0 +1,269 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 40 11% 96%;
+  --foreground: 24 7% 14%;
+  --card: 0 0% 100%;
+  --card-foreground: 24 7% 14%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 24 7% 14%;
+  --primary: 230 65% 18%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 38 38% 77%;
+  --secondary-foreground: 24 7% 14%;
+  --muted: 40 8% 91%;
+  --muted-foreground: 24 5% 40%;
+  --accent: 0 69% 50%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 69% 50%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 35 10% 84%;
+  --input: 35 10% 84%;
+  --ring: 230 65% 18%;
+  --radius: 0.4rem;
+}
+
+@layer base {
+  * { @apply border-border; }
+  html { scroll-behavior: smooth; }
+  body { @apply bg-background text-foreground; margin: 0; }
+}
+
+.top-strip { background: #2e251f; color: #fff; font-size: 10px; font-weight: 700; letter-spacing: .12em; padding: 7px 12px; text-align: center; }
+.sale-hero { position: relative; overflow: hidden; background: #302722; color: #fff; }
+.sale-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% -20%, rgba(135, 99, 60, .55), transparent 55%); opacity: .8; }
+.sale-hero::after { content: ''; position: absolute; inset: auto 0 0; height: 1px; background: rgba(255,255,255,.25); }
+
+/* Digital Image Hero Carousel - Fixed Strict Height (Never changes on slide transition) */
+.hero-carousel-container {
+  height: 440px;
+  max-height: 440px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media (min-width: 640px) {
+  .hero-carousel-container {
+    height: 500px;
+    max-height: 500px;
+  }
+}
+@media (min-width: 1024px) {
+  .hero-carousel-container {
+    height: 560px;
+    max-height: 560px;
+  }
+}
+.hero-carousel-overlay {
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(16, 26, 74, 0.45) 0%, rgba(16, 26, 74, 0.82) 75%, rgba(10, 16, 45, 0.95) 100%),
+    linear-gradient(to bottom, rgba(16, 26, 74, 0.8) 0%, rgba(20, 20, 25, 0.55) 50%, rgba(16, 26, 74, 0.9) 100%);
+}
+.hero-slide-title {
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.75), 0 1px 4px rgba(0, 0, 0, 0.9);
+}
+.hero-progress-active {
+  animation: heroProgressBar linear forwards;
+}
+@keyframes heroProgressBar {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+.carousel-nav-btn {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+.trust-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  background: #ffffff;
+  color: #101a4a;
+  padding: 13px 20px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  border-bottom: 1px solid #eef0f4;
+  box-shadow: 0 1px 3px rgba(16, 26, 74, 0.04);
+}
+.trust-row > div,
+.trust-row .trust-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 32px;
+}
+
+/* Animated Truck Track: full speed drive left-to-right, flip, right-to-left */
+.truck-track {
+  position: relative;
+  width: 52px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  overflow: visible;
+}
+.truck-road-line {
+  position: absolute;
+  bottom: 2px;
+  left: 1px;
+  right: 1px;
+  height: 1.5px;
+  background: repeating-linear-gradient(90deg, #101a4a 0 4px, transparent 4px 7px);
+  opacity: 0.22;
+  border-radius: 1px;
+}
+.truck-vehicle {
+  position: absolute;
+  top: 1px;
+  left: 0;
+  color: #101a4a;
+  animation: truckFullSpeedDrive 3.2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  transform-origin: center center;
+  will-change: left, transform;
+}
+.truck-track:hover .truck-vehicle {
+  color: #d9272e;
+}
+
+/* Speed streaks behind the truck */
+.truck-track::before,
+.truck-track::after {
+  content: '';
+  position: absolute;
+  height: 1.5px;
+  border-radius: 2px;
+  background: #d9272e;
+  pointer-events: none;
+  opacity: 0;
+}
+.truck-track::before {
+  top: 11px;
+  left: 4px;
+  width: 16px;
+  animation: truckTrailRight 3.2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+.truck-track::after {
+  top: 11px;
+  right: 4px;
+  width: 16px;
+  animation: truckTrailLeft 3.2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+@keyframes truckFullSpeedDrive {
+  0% {
+    left: 0px;
+    transform: scaleX(1) translateY(0);
+  }
+  4% {
+    left: 0px;
+    transform: scaleX(1) translateY(1px) rotate(-1.5deg);
+  }
+  36% {
+    left: calc(100% - 21px);
+    transform: scaleX(1) translateY(-1px) rotate(1deg);
+  }
+  42% {
+    left: calc(100% - 21px);
+    transform: scaleX(1) translateY(0) rotate(0deg);
+  }
+  46% {
+    left: calc(100% - 21px);
+    transform: scaleX(-1) translateY(-1px);
+  }
+  50% {
+    left: calc(100% - 21px);
+    transform: scaleX(-1) translateY(0);
+  }
+  54% {
+    left: calc(100% - 21px);
+    transform: scaleX(-1) translateY(1px) rotate(1.5deg);
+  }
+  86% {
+    left: 0px;
+    transform: scaleX(-1) translateY(-1px) rotate(-1deg);
+  }
+  92% {
+    left: 0px;
+    transform: scaleX(-1) translateY(0) rotate(0deg);
+  }
+  96% {
+    left: 0px;
+    transform: scaleX(1) translateY(-1px);
+  }
+  100% {
+    left: 0px;
+    transform: scaleX(1) translateY(0);
+  }
+}
+
+@keyframes truckTrailRight {
+  0%, 5% { opacity: 0; width: 0; transform: scaleX(0); }
+  12%, 30% { opacity: 0.85; width: 18px; transform: scaleX(1); }
+  36%, 100% { opacity: 0; width: 0; transform: scaleX(0); }
+}
+
+@keyframes truckTrailLeft {
+  0%, 53% { opacity: 0; width: 0; transform: scaleX(0); }
+  60%, 80% { opacity: 0.85; width: 18px; transform: scaleX(1); }
+  86%, 100% { opacity: 0; width: 0; transform: scaleX(0); }
+}
+.section-kicker { color: #d9272e; font-size: 10px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.section-title { color: #101a4a; font-size: clamp(1.45rem, 3vw, 2rem); font-weight: 900; line-height: 1.15; text-transform: uppercase; }
+.category-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.category-card { position: relative; overflow: hidden; background: #302722; box-shadow: 0 2px 0 rgba(36,33,31,.08); }
+.category-card img { display: block; aspect-ratio: 1.42; width: 100%; object-fit: cover; transition: transform .5s ease; }
+.category-card:hover img { transform: scale(1.06); }
+.category-copy { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; min-height: 88px; padding: 10px 8px; color: white; text-align: center; }
+.category-copy small { font-size: 9px; font-weight: 700; letter-spacing: .15em; }
+.category-copy strong { font-size: clamp(.95rem, 1.8vw, 1.23rem); font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+.category-copy em { font-size: 9px; font-style: normal; font-weight: 800; letter-spacing: .15em; text-decoration: underline; }
+.inspiration-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+.inspiration-card { overflow: hidden; background: white; }
+.inspiration-card img { display: block; aspect-ratio: 1.05; width: 100%; object-fit: cover; transition: transform .45s ease; }
+.inspiration-card:hover img { transform: scale(1.04); }
+.inspiration-card span { display: block; padding: 7px 8px; color: #6a6865; font-size: 9px; }
+.service-bar { display: grid; grid-template-columns: repeat(3, 1fr); background: #101a4a; color: #fff; }
+.service-bar > div { display: flex; align-items: center; justify-content: center; gap: 12px; border-right: 1px solid rgba(255,255,255,.2); padding: 16px; }
+.service-bar > div:last-child { border: 0; }
+.service-bar span { display: flex; flex-direction: column; gap: 3px; }
+.service-bar b { font-size: 12px; }
+.service-bar small { color: rgba(255,255,255,.68); font-size: 9px; }
+.footer-title { margin-bottom: 15px; color: white; font-size: 12px; font-weight: 900; text-transform: uppercase; }
+.cookie-banner { position: fixed; bottom: 16px; left: 16px; z-index: 30; display: flex; max-width: 390px; align-items: center; gap: 20px; border-radius: 3px; background: #fff; padding: 16px; box-shadow: 0 8px 35px rgba(0,0,0,.22); font-size: 10px; line-height: 1.5; }
+.cookie-banner p { margin: 0; }
+.cookie-primary, .cookie-secondary { padding: 8px 14px; font-size: 10px; font-weight: 700; }
+.cookie-primary { background: #d9272e; color: #fff; }
+.cookie-secondary { border: 1px solid #d6d4d0; color: #24211f; }
+
+@media (max-width: 700px) {
+  .trust-row {
+    grid-template-columns: repeat(2, 1fr);
+    font-size: 11.5px;
+    padding: 10px 12px;
+    gap: 10px;
+  }
+  .trust-row > div,
+  .trust-row .trust-item {
+    min-height: 32px;
+    gap: 6px;
+  }
+  .truck-track {
+    width: 44px;
+    height: 22px;
+  }
+  .category-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .category-copy { min-height: 76px; }
+  .category-copy strong { font-size: .78rem; }
+  .inspiration-row { grid-template-columns: repeat(2, 1fr); }
+  .inspiration-card:last-child { display: none; }
+  .service-bar { grid-template-columns: 1fr; }
+  .service-bar > div { justify-content: flex-start; border-right: 0; border-bottom: 1px solid rgba(255,255,255,.2); padding: 14px 22px; }
+  .cookie-banner { right: 16px; max-width: none; flex-direction: column; align-items: stretch; gap: 10px; }
+  .cookie-banner .flex { justify-content: flex-end; }
+}
