@@ -23,6 +23,7 @@ import {
   X,
 } from 'lucide-react';
 import { CartProvider, useCart } from '@/lib/cart-context';
+import { PaymentIconsGrid } from '@/components/PaymentIcons';
 import {
   CATEGORIES,
   CATEGORY_IMAGE_MAP,
@@ -514,27 +515,27 @@ function StoreApp() {
 
       {/* Footer */}
       <footer className="bg-[#5c5c5c] px-5 pb-28 pt-12 text-white sm:px-10">
-        <div className="mx-auto grid max-w-[1240px] gap-9 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mx-auto grid max-w-[1240px] grid-cols-2 gap-6 sm:gap-9 lg:grid-cols-4">
           <div>
             <h3 className="footer-title">Customer Services</h3>
             <ul className="space-y-2 text-xs text-white/75">
               <li>
-                <button onClick={() => setHelpModalOpen(true)} className="hover:text-white hover:underline">
+                <button onClick={() => setHelpModalOpen(true)} className="hover:text-white hover:underline text-left">
                   Contact Us & FAQs
                 </button>
               </li>
               <li>
-                <button onClick={() => setHelpModalOpen(true)} className="hover:text-white hover:underline">
+                <button onClick={() => setHelpModalOpen(true)} className="hover:text-white hover:underline text-left">
                   Delivery Information
                 </button>
               </li>
               <li>
-                <button onClick={() => handleSelectCategory('All Tiles')} className="hover:text-white hover:underline">
+                <button onClick={() => handleSelectCategory('All Tiles')} className="hover:text-white hover:underline text-left">
                   Sample Service (৳150)
                 </button>
               </li>
               <li>
-                <button onClick={() => setHelpModalOpen(true)} className="hover:text-white hover:underline">
+                <button onClick={() => setHelpModalOpen(true)} className="hover:text-white hover:underline text-left">
                   Returns and Refunds
                 </button>
               </li>
@@ -545,23 +546,23 @@ function StoreApp() {
             <h3 className="footer-title">Here to Help</h3>
             <ul className="space-y-2 text-xs text-white/75">
               <li>
-                <button onClick={() => setCalculatorOpen(true)} className="hover:text-white hover:underline">
-                  Tile & Box Area Calculator
+                <button onClick={() => setCalculatorOpen(true)} className="hover:text-white hover:underline text-left">
+                  Tile & Box Calculator
                 </button>
               </li>
               <li>
-                <button onClick={() => setHelpModalOpen(true)} className="hover:text-white hover:underline">
-                  Underfloor Heating Advice
+                <button onClick={() => setHelpModalOpen(true)} className="hover:text-white hover:underline text-left">
+                  Underfloor Heating
                 </button>
               </li>
               <li>
-                <button onClick={() => setHelpModalOpen(true)} className="hover:text-white hover:underline">
+                <button onClick={() => setHelpModalOpen(true)} className="hover:text-white hover:underline text-left">
                   Anti-Slip R-Rating Guide
                 </button>
               </li>
               <li>
-                <button onClick={() => setShowroomsOpen(true)} className="hover:text-white hover:underline">
-                  Showroom Consultations
+                <button onClick={() => setShowroomsOpen(true)} className="hover:text-white hover:underline text-left">
+                  Showroom Visits
                 </button>
               </li>
             </ul>
@@ -571,19 +572,24 @@ function StoreApp() {
             <h3 className="footer-title">Company</h3>
             <ul className="space-y-2 text-xs text-white/75">
               <li>
-                <button onClick={() => setTradeModalOpen(true)} className="hover:text-white hover:underline">
+                <button onClick={() => setTradeModalOpen(true)} className="hover:text-white hover:underline text-left">
                   Trade Account (15% Off)
                 </button>
               </li>
               <li>
-                <button onClick={() => setShowroomsOpen(true)} className="hover:text-white hover:underline">
+                <button onClick={() => setShowroomsOpen(true)} className="hover:text-white hover:underline text-left">
                   Showroom Locations
                 </button>
               </li>
               <li>
-                <a href="#about" className="hover:text-white hover:underline">
-                  About Walls and Floors
+                <a href="#about" className="hover:text-white hover:underline text-left">
+                  About Walls & Floors
                 </a>
+              </li>
+              <li>
+                <button onClick={() => setHelpModalOpen(true)} className="hover:text-white hover:underline text-left">
+                  Price Match Promise
+                </button>
               </li>
             </ul>
           </div>
@@ -592,25 +598,48 @@ function StoreApp() {
             <h3 className="footer-title">Trade & Connect</h3>
             <button
               onClick={() => setTradeModalOpen(true)}
-              className="flex w-full items-center justify-between border border-white/25 bg-white/10 px-4 py-3 text-xs transition-colors hover:bg-white/20"
+              className="flex w-full items-center justify-between rounded border border-white/25 bg-white/10 px-3.5 py-2.5 text-xs transition-colors hover:bg-white/20"
             >
               <span>Trade Account</span>
               <span className="font-bold text-[#d9b67d]">Apply / Login</span>
             </button>
-            <p className="mt-5 text-xs font-bold uppercase tracking-wider text-white/70">
+            <p className="mt-4 text-[11px] font-bold uppercase tracking-wider text-white/75">
               Accepted Cards &amp; Payment
             </p>
-            <div className="mt-2 flex gap-2 text-[10px] font-bold">
-              <span className="rounded bg-white px-2 py-1 text-[#18213f]">VISA</span>
-              <span className="rounded bg-white px-2 py-1 text-[#18213f]">MASTERCARD</span>
-              <span className="rounded bg-white px-2 py-1 text-[#18213f]">AMEX</span>
-              <span className="rounded bg-white px-2 py-1 text-[#18213f]">PAYPAL</span>
+            <div className="mt-2">
+              <PaymentIconsGrid itemClassName="h-6 w-10 text-[9px]" />
             </div>
           </div>
         </div>
 
-        <div className="mx-auto mt-10 max-w-[1240px] border-t border-white/20 pt-5 text-center text-[11px] text-white/60">
-          © 2026 Walls and Floors Ltd. All rights reserved. Beautiful spaces start here.
+        {/* FOOTER BOTTOM BAR */}
+        <div className="mx-auto mt-10 max-w-[1240px] border-t border-white/20 pt-5 text-[11px] text-white/60">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <p>
+              © 2026 Walls and Floors Ltd. All rights reserved. Beautiful spaces start here.
+            </p>
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-white/70">
+              <a href="#privacy" className="hover:text-white hover:underline transition-colors">
+                Privacy Policy
+              </a>
+              <span>•</span>
+              <a href="#terms" className="hover:text-white hover:underline transition-colors">
+                Terms of Sale
+              </a>
+              <span>•</span>
+              <button
+                type="button"
+                onClick={() => setCookieVisible(true)}
+                className="hover:text-white hover:underline transition-colors"
+              >
+                Cookie Preferences
+              </button>
+              <span>•</span>
+              <a href="#security" className="hover:text-white hover:underline transition-colors">
+                Security & Fraud Protection
+              </a>
+            </div>
+          </div>
         </div>
       </footer>
 

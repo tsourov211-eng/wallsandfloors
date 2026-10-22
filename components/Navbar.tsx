@@ -792,10 +792,12 @@ export function Navbar({
               className="group flex items-center gap-2.5 whitespace-nowrap transition-all"
               aria-label="Your Site Name"
             >
-              <span className="flex h-7 w-7 items-center justify-center rounded bg-gradient-to-br from-[#d9272e] to-[#b82026] text-white shadow-sm ring-1 ring-white/20 transition-transform group-hover:scale-105">
-                <svg className="h-4 w-4 fill-white" viewBox="0 0 24 24">
-                  <path d="M12 2L2 12l10 10 10-10L12 2zm0 3.8L18.2 12 12 18.2 5.8 12 12 5.8z" />
-                </svg>
+              <span className="relative flex h-8 w-8 items-center justify-center overflow-hidden rounded-full shadow-sm ring-1 ring-white/30 transition-transform group-hover:scale-105 shrink-0 bg-[#0e163d]">
+                <img
+                  src="/icon.png?v=2"
+                  alt="Site Icon"
+                  className="h-full w-full object-cover"
+                />
               </span>
               <span className="text-[17px] sm:text-[19px] lg:text-[20px] font-black uppercase tracking-[0.18em] text-white transition-colors group-hover:text-[#d9b67d]">
                 YOUR <span className="text-[#d9b67d]">SITE</span> NAME
@@ -957,7 +959,7 @@ export function Navbar({
 
       {/* 2. SECONDARY NAV BAR (LIGHT WARM GREY WITH HOVER MEGA MENU) */}
       <div
-        className="relative border-b border-[#dad9d6] bg-[#eae9e7] text-[#2d2c2a]"
+        className="relative hidden lg:block border-b border-[#dad9d6] bg-[#eae9e7] text-[#2d2c2a]"
         onMouseLeave={handleMouseLeaveNav}
       >
         <div className="mx-auto flex h-[44px] max-w-[1400px] items-center justify-between">
@@ -1064,6 +1066,20 @@ export function Navbar({
               <Search size={16} />
             </button>
           </form>
+
+          {/* Mobile Sale Action Button */}
+          <button
+            onClick={() => {
+              onSelectCategory('All Tiles');
+              setMobileMenuOpen(false);
+              const el = document.getElementById('products-catalog');
+              if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }}
+            className="mb-4 flex w-full items-center justify-between rounded bg-[#cc0000] px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-sm transition-colors hover:bg-[#b00000]"
+          >
+            <span>Sale — Special Offers</span>
+            <ArrowRight size={15} />
+          </button>
 
           {/* Mobile Navigation Accordions */}
           <div className="space-y-3">
